@@ -50,12 +50,17 @@ digitalWrite(PIN_COLOR_B,B);
 }
 
 
-void motores(int mot_L, int mot_R)
+void motores(int mot_L, int mot_R, int* limites)
 {
   //Restringe el rango de la entrada
   mot_L=constrain(mot_L,-255,255);
   mot_R=constrain(mot_R,-255,255);
   //Mapea la entrada a los rangos máximos de los motores para asegurar proporcionalidad
+  int MOT_L_MIN=limites[0];
+  int MOT_L_MAX=limites[1];
+  int MOT_R_MIN=limites[2];
+  int MOT_R_MAX=limites[3];
+
   mot_L=map(mot_L,-255,255,MOT_L_MIN,MOT_L_MAX);
   mot_R=map(mot_R,-255,255,MOT_R_MIN,MOT_R_MAX);
   //Lógica de decisión:

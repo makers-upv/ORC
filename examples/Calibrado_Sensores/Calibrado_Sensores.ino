@@ -6,10 +6,10 @@
 // Codificado por Guillermo Orts y por Germán Torres
 
 //Límites de motores
-#define MOT_L_MIN -255
-#define MOT_L_MAX 255
-#define MOT_R_MIN -255
-#define MOT_R_MAX 255
+const int MOT_L_MIN=-255;
+const int MOT_L_MAX=255;
+const int MOT_R_MIN=-255;
+const int MOT_R_MAX=255;
 
 const int limite=512; //Límite para distinguir línea de blanco
 

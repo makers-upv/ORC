@@ -6,11 +6,12 @@
 // Codificado por Guillermo Orts y por Germán Torres
 
 //Límites de motores
-#define MOT_L_MIN -255
-#define MOT_L_MAX 255
-#define MOT_R_MIN -255
-#define MOT_R_MAX 255
+const int MOT_L_MIN=-255;
+const int MOT_L_MAX=255;
+const int MOT_R_MIN=-255;
+const int MOT_R_MAX=255;
 char recibido;
+int limites_motores[4];
 /*
   Esta función espera por puerto serie una cadena de forma:
   FX,Y //Mover hacia delante
@@ -24,6 +25,10 @@ void setup() {
   //Inicializa la librería
   inicializar();
   Serial.setTimeout(1);//Ponemos el límite de tiempo para el timeout bajo
+limites_motores[0]=MOT_L_MIN;  //Metemos en el vector de límites los límites de los motores;
+limites_motores[1]=MOT_L_MAX;
+limites_motores[2]=MOT_R_MIN;
+limites_motores[3]=MOT_R_MAX;
 }
 
 void loop() {
@@ -31,19 +36,19 @@ void loop() {
   while (!Serial.available());
   recibido = Serial.read(); //Lee el primer caracter
 
-  if (bufferSerie[0] == 'F') //Si detecta "F"
+  if (recibido == 'F') //Si detecta "F"
   { int L;
     int R;
-    L = Serial.parseInt(','); //Lee primer valor
-    R = Serial.parseInt(); //Lee segundo valor
-    motores(L, R);
+    L =int( Serial.parseInt()); //Lee primer valor
+    R =int( Serial.parseInt()); //Lee segundo valor
+    motores(L, R, limites_motores);
   }
-  else if (bufferSerie[0] == 'B')
+  else if (recibido == 'B')
   {
     int L;
     int R;
-    L = Serial.parseInt(','); //Lee primer valor
-    R = Serial.parseInt(); //Lee segundo valor
-    motores(-L, -R);
+    L =int( Serial.parseInt()); //Lee primer valor
+    R =int( Serial.parseInt()); //Lee segundo valor
+    motores(-L, -R,limites_motores);
   }
 }

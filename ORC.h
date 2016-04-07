@@ -39,6 +39,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include <HC_SR04.h>
+
 //Debugging por Serie
 #define DEBUG_BARRIDO false
 #define DEBUG_EXTREMOS false
@@ -46,7 +47,7 @@
 void inicializar(); //Inicializa E/S y pone el ADC en modo rápido
 void LEDs(bool R,bool Y,bool G); //Enciende o apaga los LEDs de estado del robot.
 void RGB(bool R,bool G,bool B); //Función auxiliar para el sensor de color, enciende el LED RGB en el color que toca.
-void motores(int mot_L, int mot_R); //Enciende los motores en la velocidad seleccionada por el usuario, recibe dos enteros de -255 a 255.
+void motores(int mot_L, int mot_R,int* limites); //Enciende los motores en la velocidad seleccionada por el usuario, recibe dos enteros de -255 a 255.
 void espera();//Espera inicial del robot con cuenta atrás.
 int* lee_color();// Devuelve un vector de 3 elementos con los valores de rojo, verde y azul del sensor de color.
 int* lee_linea(); //Devuelve un vector de 2 elementos con los valores de los sensores de línea izquierdo y derecho.
