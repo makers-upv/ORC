@@ -14,6 +14,7 @@ const int MOT_R_MAX=255;
 const int limite=512; //Límite para distinguir línea de blanco
 
 #define tipo_sensor 0//0: Colores/1: IR Lineas analógico/2: Líneas digital/3: Ultrasonidos
+int retardo_muestras=100;
 
 void setup() {
   //Inicializa la librería
@@ -56,11 +57,11 @@ break;
 case 3://Distancia
 int distancia=0;
 distancia=lee_distancia();
-Serial.print("Distancia: ")
+Serial.print("Distancia: ");
 Serial.print(distancia);
 Serial.print(" cm");
 break;
 }
 Serial.println();
-delay(1000); //Espera 1 segundo
+delay(retardo_muestras); //Espera 1 segundo
 }

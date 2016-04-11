@@ -7,17 +7,23 @@
 #ifndef ORC
 #define ORC
 #endif
+
+//Librerías base
+#include <Arduino.h>
+#include <Servo.h>
+#include <HC_SR04.h>
+
 #define PIN_A_L 6
 #define PIN_A_R 9
 #define PIN_B_L 10
 #define PIN_B_R 11
 #define PIN_SERVO 13
-#define PIN_LINE_L A0 //Analog
-#define PIN_LINE_R A1 //Analog
-#define PIN_COLOR_R A2 //Analog
-#define PIN_COLOR_G A3 //Analog
-#define PIN_COLOR_B A4//Analog
-#define PIN_COLOR_SENSE A5//Analog
+#define PIN_LINE_L A0 //Analog 0
+#define PIN_LINE_R A1 //Analog 1
+#define PIN_COLOR_R A2 //Analog 2
+#define PIN_COLOR_G A3 //Analog 3
+#define PIN_COLOR_B A4//Analog 4
+#define PIN_COLOR_SENSE A6//Analog 6
 #define PIN_SONAR_TRIGGER 3
 #define PIN_SONAR_ECHO 2
 #define PIN_PULSADOR 4
@@ -25,7 +31,7 @@
 #define PIN_FC2 8
 #define PIN_LED_1 5
 #define PIN_LED_2 12
-#define PIN_LED_3 6 //Analog
+#define PIN_LED_3 A5 //Analog 5
 
 // Conversión A/D Rápida
 #define FASTADC 1
@@ -35,10 +41,6 @@
 #ifndef sbi
 #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
 #endif
-//Librerías base
-#include <Arduino.h>
-#include <Servo.h>
-#include <HC_SR04.h>
 
 //Debugging por Serie
 #define DEBUG_BARRIDO false
