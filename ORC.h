@@ -49,11 +49,11 @@
 void inicializar(); //Inicializa E/S y pone el ADC en modo rápido
 void LEDs(bool R,bool Y,bool G); //Enciende o apaga los LEDs de estado del robot.
 void RGB(bool R,bool G,bool B); //Función auxiliar para el sensor de color, enciende el LED RGB en el color que toca.
-void motores(int mot_L, int mot_R,int* limites); //Enciende los motores en la velocidad seleccionada por el usuario, recibe dos enteros de -255 a 255.
+void motores(int mot_L, int mot_R,int* limites); //Enciende los motores en la velocidad seleccionada por el usuario, recibe dos enteros de -255 a 255 y un vector de 4 enteros con los límites por motor y sentido de giro.
 void espera();//Espera inicial del robot con cuenta atrás.
 int* lee_color();// Devuelve un vector de 3 elementos con los valores de rojo, verde y azul del sensor de color.
 int* lee_linea(); //Devuelve un vector de 2 elementos con los valores de los sensores de línea izquierdo y derecho.
-bool* lee_linea_bin(int limite); //Devuelve un vecto de 2 elementos binarios con que indican si hay línea o no basado en el límete pasado a la función.
+bool* lee_linea_bin(int limite); //Devuelve un vector de 2 elementos binarios con que indican si hay línea o no basado en el límite pasado a la función.
 int lee_distancia();// Devuelve la distancia en cm registrada por el sensor de ultrasonidos.
 int* barrido(int semicono, int muestras); //Devuelve un vector de tamaño 2*(2*(muestras-1)) con las posiciones angulares y las distancias del barrido.
 int* extremos();// Devuelve los caminos de mínima y máxima distancia y su orientación respecto al robot.

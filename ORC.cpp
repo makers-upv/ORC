@@ -5,7 +5,7 @@ Servo servoRobot;
 void inicializar()
 {//Inicializa librerías y servo
   ultrasonido.begin();
-  Serial.begin(112500);
+  Serial.begin(57600);
   servoRobot.attach(PIN_SERVO);
   servoRobot.write(90);
   //Mapeo de pines

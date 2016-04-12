@@ -24,31 +24,41 @@ int limites_motores[4];
 void setup() {
   //Inicializa la librería
   inicializar();
-  Serial.setTimeout(1);//Ponemos el límite de tiempo para el timeout bajo
+  Serial.setTimeout(100);//Ponemos el límite de tiempo para el timeout bajo
 limites_motores[0]=MOT_L_MIN;  //Metemos en el vector de límites los límites de los motores;
 limites_motores[1]=MOT_L_MAX;
 limites_motores[2]=MOT_R_MIN;
 limites_motores[3]=MOT_R_MAX;
+Serial.println("Preparado!");
 }
 
 void loop() {
   //Espera a que le llegue algo al puerto serie
   while (!Serial.available());
   recibido = Serial.read(); //Lee el primer caracter
-
   if (recibido == 'F') //Si detecta "F"
   { int L;
     int R;
+    Serial.println("Recibido F");
     L =int( Serial.parseInt()); //Lee primer valor
     R =int( Serial.parseInt()); //Lee segundo valor
+    Serial.print("Rueda L: ");
+    Serial.print(L);
+    Serial.print(" Rueda R: ");
+    Serial.println(R);
     motores(L, R, limites_motores);
   }
   else if (recibido == 'B')
   {
     int L;
     int R;
+    Serial.println("Recibido B");
     L =int( Serial.parseInt()); //Lee primer valor
     R =int( Serial.parseInt()); //Lee segundo valor
+    Serial.print("Rueda L: ");
+    Serial.print(-L);
+    Serial.print(" Rueda R: ");
+    Serial.println(-R);
     motores(-L, -R,limites_motores);
   }
 }
