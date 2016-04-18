@@ -130,11 +130,15 @@ int* lee_color()
   */
   //Autoexplanatorio
   static int valores_color[3];
+  int retardo_colores=50;
   RGB(true,false,false);
+  delay(retardo_colores);
 valores_color[0]=analogRead(PIN_COLOR_SENSE);
   RGB(false,true,false);
+  delay(retardo_colores);
 valores_color[1]=analogRead(PIN_COLOR_SENSE);
   RGB(false,false,true);
+  delay(retardo_colores);
 valores_color[2]=analogRead(PIN_COLOR_SENSE);
   RGB(false,false,false);
   return valores_color;

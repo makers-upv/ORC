@@ -6,15 +6,15 @@
 // Codificado por Guillermo Orts y por Germán Torres
 
 //Límites de motores
-const int MOT_L_MIN=-255;
-const int MOT_L_MAX=255;
-const int MOT_R_MIN=-255;
-const int MOT_R_MAX=255;
+const int MOT_L_MIN = -255;
+const int MOT_L_MAX = 255;
+const int MOT_R_MIN = -255;
+const int MOT_R_MAX = 255;
 
-const int limite=512; //Límite para distinguir línea de blanco
+const int limite = 512; //Límite para distinguir línea de blanco
 
-#define tipo_sensor 0//0: Colores/1: IR Lineas analógico/2: Líneas digital/3: Ultrasonidos
-int retardo_muestras=100;
+#define tipo_sensor 5//0: Colores/1: IR Lineas analógico/2: Líneas digital/3: Ultrasonidos/4: barrido/5: extremos
+int retardo_muestras = 100;
 
 void setup() {
   //Inicializa la librería
@@ -23,45 +23,80 @@ void setup() {
 }
 
 void loop() {
-switch(tipo_sensor)
-{
-case 0: //Colores
-int* colores;
-colores=lee_color();
-Serial.print("R: ");
-Serial.print(colores[0]);
-Serial.print(" G: ");
-Serial.print(colores[1]);
-Serial.print(" B: ");
-Serial.print(colores[2]);
-break;
+  int distancia = 0;
+  switch (tipo_sensor)
+  {
+    case 0: //Colores
+      int* colores;
+      bool* linea_b;
+      int* linea;
+      int* valores_distancias;
+      colores = lee_color();
+      Serial.print("R: ");
+      Serial.print(colores[0]);
+      Serial.print(" G: ");
+      Serial.print(colores[1]);
+      Serial.print(" B: ");
+      Serial.print(colores[2]);
+      break;
 
-case 1: //Linea analógico
-int* linea;
-linea=lee_linea();
-Serial.print("Sensor L:");
-Serial.print(linea[0]);
-Serial.print(" Sensor R:");
-Serial.print(linea[1]);
-break;
+    case 1: //Linea analógico
 
-case 2:  //Linea digital
-bool* linea_b;
-linea_b=lee_linea_bin(limite);
-Serial.print("Sensor L:");
-Serial.print(linea_b[0]);
-Serial.print(" Sensor R:");
-Serial.print(linea_b[1]);
-break;
+      linea = lee_linea();
+      Serial.print("Sensor L:");
+      Serial.print(linea[0]);
+      Serial.print(" Sensor R:");
+      Serial.print(linea[1]);
+      break;
 
-case 3://Distancia
-int distancia=0;
-distancia=lee_distancia();
-Serial.print("Distancia: ");
-Serial.print(distancia);
-Serial.print(" cm");
-break;
-}
-Serial.println();
-delay(retardo_muestras); //Espera 1 segundo
+    case 2:  //Linea digital
+
+      linea_b = lee_linea_bin(limite);
+      Serial.print("Sensor L:");
+      Serial.print(linea_b[0]);
+      Serial.print(" Sensor R:");
+      Serial.print(linea_b[1]);
+      break;
+
+    case 3://Distancia
+
+      distancia = lee_distancia();
+      Serial.print("Distancia: ");
+      Serial.print(distancia);
+      Serial.print(" cm");
+      break;
+
+    case 4://Barrido
+      valores_distancias = barrido(90, 4);
+      for (int i = 0; i < 14; i++)
+      {
+        if ((i % 2) == 0)
+        {
+          Serial.print("Angulo: ");
+        }
+        else
+        {
+          Serial.print("Distancia: ");
+        }
+        Serial.print(valores_distancias[i]);
+        Serial.println("");
+      }
+      break;
+    case 5:
+      valores_distancias = extremos();
+      Serial.print("Min pos: ");
+      Serial.print(valores_distancias[0]);
+
+      Serial.print(" Min: ");
+      Serial.print(valores_distancias[1]);
+
+      Serial.print(" Max pos: ");
+      Serial.print(valores_distancias[2]);
+
+      Serial.print(" Max: ");
+      Serial.print(valores_distancias[3]);
+      break;
+  }
+  Serial.println();
+  delay(retardo_muestras); //Espera 1 segundo
 }
