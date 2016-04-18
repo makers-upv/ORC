@@ -45,8 +45,13 @@
 //Debugging por Serie
 #define DEBUG_BARRIDO false
 #define DEBUG_EXTREMOS false
+#define DEBUG_ESTADISTICAS false
+#define DEBUG_ESTADISTICAS1 false
+#define DEBUG_ESTADISTICAS2 false
+
 //Funciones disponibles:
 void inicializar(); //Inicializa E/S y pone el ADC en modo rápido
+void inicializar_calibracion_color(int* valores_r,int* valores_g,int* valores_b,int* valores_w,int* valores_black);
 void LEDs(bool R,bool Y,bool G); //Enciende o apaga los LEDs de estado del robot.
 void RGB(bool R,bool G,bool B); //Función auxiliar para el sensor de color, enciende el LED RGB en el color que toca.
 void motores(int mot_L, int mot_R,int* limites); //Enciende los motores en la velocidad seleccionada por el usuario, recibe dos enteros de -255 a 255 y un vector de 4 enteros con los límites por motor y sentido de giro.
@@ -57,3 +62,5 @@ bool* lee_linea_bin(int limite); //Devuelve un vector de 2 elementos binarios co
 int lee_distancia();// Devuelve la distancia en cm registrada por el sensor de ultrasonidos.
 int* barrido(int semicono, int muestras); //Devuelve un vector de tamaño 2*(2*(muestras-1)) con las posiciones angulares y las distancias del barrido.
 int* extremos();// Devuelve los caminos de mínima y máxima distancia y su orientación respecto al robot.
+int lee_color_calibrado(int tolerancia_color); //Devuelve el color en función de la calibración inicial. Un valor de tolerancia razonable es 25.
+//Nota: código de colores: -1: color no reconocido/0: color rojo/1: color verde/2: color azul/3: color blanco/4: color negro

@@ -11,26 +11,53 @@ const int MOT_L_MAX = 255;
 const int MOT_R_MIN = -255;
 const int MOT_R_MAX = 255;
 
+//Calibracion de colores
+int ROJO_CAL[10];
+int VERDE_CAL[10];
+int AZUL_CAL[10];
+int BLANCO_CAL[10];
+int NEGRO_CAL[10];
+
 const int limite = 512; //Límite para distinguir línea de blanco
 
-#define tipo_sensor 5//0: Colores/1: IR Lineas analógico/2: Líneas digital/3: Ultrasonidos/4: barrido/5: extremos
+#define tipo_sensor 6//0: Colores/1: IR Lineas analógico/2: Líneas digital/3: Ultrasonidos/4: barrido/5: extremos/6: colores_calibrado
 int retardo_muestras = 100;
 
 void setup() {
-  //Inicializa la librería
+//Inicializa la librería
   inicializar();
+  //Metemos los colores en sus vectores
+  ROJO_CAL[0] = 859;
+  ROJO_CAL[1] = 695;
+  ROJO_CAL[2] = 665;
+  VERDE_CAL[0] = 707;
+  VERDE_CAL[1] = 755;
+  VERDE_CAL[2] = 675;
+  AZUL_CAL[0] = 709;
+  AZUL_CAL[1] = 665;
+  AZUL_CAL[2] = 719;
+  BLANCO_CAL[0] = 866;
+  BLANCO_CAL[1] = 831;
+  BLANCO_CAL[2] = 824;
+  NEGRO_CAL[0] = 657;
+  NEGRO_CAL[1] = 627;
+  NEGRO_CAL[2] = 632;
+  //Realiza cálculos para asegurarse de que no interrumpe el programa constantemente:
+  inicializar_calibracion_color(ROJO_CAL, VERDE_CAL, AZUL_CAL, BLANCO_CAL, NEGRO_CAL);
+
   Serial.println("Calibrado de Sensores");
 }
 
 void loop() {
   int distancia = 0;
+  int* colores;
+  bool* linea_b;
+  int* linea;
+  int* valores_distancias;
+  int color_leido;
   switch (tipo_sensor)
   {
     case 0: //Colores
-      int* colores;
-      bool* linea_b;
-      int* linea;
-      int* valores_distancias;
       colores = lee_color();
       Serial.print("R: ");
       Serial.print(colores[0]);
@@ -95,6 +122,30 @@ void loop() {
 
       Serial.print(" Max: ");
       Serial.print(valores_distancias[3]);
+      break;
+    case 6:
+      color_leido = lee_color_calibrado(25); //Tolerancia recomendada según el calibrado
+      switch (color_leido)
+      {
+        case -1:
+          Serial.print("No se reconoce el color...");
+          break;
+        case 0:
+          Serial.print("El color es rojo.");
+          break;
+        case 1:
+          Serial.print("El color es verde.");
+          break;
+        case 2:
+          Serial.print("El color es azul.");
+          break;
+        case 3:
+          Serial.print("El color es blanco.");
+          break;
+        case 4:
+          Serial.print("El color es negro.");
+          break;
+      }
       break;
   }
   Serial.println();
