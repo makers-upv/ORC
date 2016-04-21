@@ -16,10 +16,10 @@ void inicializar()
   servoRobot.attach(PIN_SERVO);
   servoRobot.write(90);
   //Mapeo de pines
-  pinMode(PIN_A_L,OUTPUT);
-  pinMode(PIN_A_R,OUTPUT);
-  pinMode(PIN_B_L,OUTPUT);
-  pinMode(PIN_B_R,OUTPUT);
+  pinMode(PIN_IN1,OUTPUT);
+  pinMode(PIN_IN2,OUTPUT);
+  pinMode(PIN_IN3,OUTPUT);
+  pinMode(PIN_IN4,OUTPUT);
   pinMode(PIN_COLOR_R,OUTPUT);
   pinMode(PIN_COLOR_G,OUTPUT);
   pinMode(PIN_COLOR_B,OUTPUT);
@@ -38,6 +38,7 @@ void inicializar()
   cbi(ADCSRA, ADPS1) ;
   cbi(ADCSRA, ADPS0) ;
   #endif
+
   //Enciende el LED rojo
 LEDs(true,false,false);
 }
@@ -73,34 +74,34 @@ void motores(int mot_L, int mot_R, int* limites)
   //Lógica de decisión:
   if(mot_L>0)
   {
-    analogWrite(PIN_A_L,mot_L);
-    analogWrite(PIN_A_R,0);
+    analogWrite(PIN_IN1,mot_L);
+    analogWrite(PIN_IN2,0);
   }
   else if(mot_L==0)
   {
-    analogWrite(PIN_A_L,0);
-    analogWrite(PIN_A_R,0);
+    analogWrite(PIN_IN1,0);
+    analogWrite(PIN_IN2,0);
   }
   else
   {
-    analogWrite(PIN_A_L,0);
-    analogWrite(PIN_A_R,-mot_L);
+    analogWrite(PIN_IN1,0);
+    analogWrite(PIN_IN2,-1*mot_L);
   }
 
   if(mot_R>0)
   {
-    analogWrite(PIN_B_L,mot_R);
-    analogWrite(PIN_B_R,0);
+    analogWrite(PIN_IN3,mot_R);
+    analogWrite(PIN_IN4,0);
   }
   else if(mot_R==0)
   {
-    analogWrite(PIN_B_L,0);
-    analogWrite(PIN_B_R,0);
+    analogWrite(PIN_IN3,0);
+    analogWrite(PIN_IN4,0);
   }
   else
   {
-    analogWrite(PIN_B_L,0);
-    analogWrite(PIN_B_R,-mot_R);
+    analogWrite(PIN_IN3,0);
+    analogWrite(PIN_IN4,-1*mot_R);
   }
 }
 
