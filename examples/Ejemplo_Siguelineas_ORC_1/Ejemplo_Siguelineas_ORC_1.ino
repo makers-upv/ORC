@@ -23,8 +23,7 @@ int limite = 0;
 volatile int V_D = 0;
 volatile int V_I = 0;
 bool salido=false;
-int vdmax=255;
-int vimax=255;
+
 void setup() {
   //Inicializa la librería
   inicializar();
@@ -78,33 +77,33 @@ void loop() {
     }
     if (!S[0] && S[1] && S_1[0] && S_1[1]) //GIRO IZQ 1
     {
-      V_D = vdmax;
+      V_D = 255;
       V_I = 0;
     }
     if (!S[0] && S[1] && !S_1[0] && S_1[1]) //GIRO IZQ 2
     {
-      V_D = vdmax;
+      V_D = 255;
       V_I = 0;
     }
     if (S[0] && !S[1] && S_1[0] && S_1[1]) // GIRO DER 1
     {
       V_D = 0;
-      V_I = vimax;
+      V_I = 255;
     }
     if (S[0] && !S[1] && S_1[0] && !S_1[1]) // GIRO DER 2
     {
       V_D = 0;
-      V_I = vimax;
+      V_I = 255;
     }
     if (!S[0] && S[1] && S_1[0] && !S_1[1]) // GIR IZQ DESDE DER
     {
-      V_D = vdmax;
+      V_D = 255;
       V_I = 0;
     }
     if (S[0] && !S[1] && !S_1[0] && S_1[1]) // GIR DER DESDE IZQ
     {
       V_D = 0;
-      V_I = vimax;
+      V_I = 255;
     }
     if (!S[0] && !S[1] && !S_1[0] && !S_1[1]) // ATRAS 1
     {
@@ -121,8 +120,8 @@ void loop() {
   }
   else
   {
-    V_I = -vimax;
-    V_D = -vdmax;
+    V_I = -255;
+    V_D = -255;
     //if ((!S[0] && S_1[0]) || (!S[1] && S_1[1])) //Si vuelve a pisar linea...
     if (!S[0]||!S[1])//Si vuelve a pisar linea...
     {

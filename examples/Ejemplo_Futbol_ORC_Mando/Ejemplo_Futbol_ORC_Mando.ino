@@ -28,13 +28,13 @@ void loop() {
   joy2pulsador = analogRead(A6);
 
   Serial.print("ORC");
-  Serial.print(joy1x / 4);
+  Serial.print(joy1x);
   Serial.print(",");
-  Serial.print(joy1y / 4);
+  Serial.print(joy1y);
   Serial.print(",");
-  Serial.print(joy2x / 4);
+  Serial.print(joy2x);
   Serial.print(",");
-  Serial.print(joy2y / 4);
+  Serial.print(joy2y);
   Serial.print(",");
   if (joy2pulsador < 512) {
     Serial.print(1);

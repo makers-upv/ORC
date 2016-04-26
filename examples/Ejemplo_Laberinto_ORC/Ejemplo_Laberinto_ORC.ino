@@ -27,7 +27,7 @@ int corrige = 0;
 const int limite_distancia = 25;
 const int limite_desviacion = 25;
 const int limite_salida = 150;
-const float escalado_giro = 0.05;
+const float escalado_giro = 0.05; //AJUSTAR!
 const float escalado_recta = 0.05;
 void setup() {
   //Inicializa la librería
@@ -238,4 +238,3 @@ void recto( int distancia)
     motores(0, 0, limites_motores);
   }
 }
-

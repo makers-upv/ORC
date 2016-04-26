@@ -93,8 +93,8 @@ void loop() {
   //Cálculo del error
   error_1 = error; //almacenamos el error anterior
   error = (2.0 * (float)(S[0] - ((maxIR + minIR) / 2)) / (float)(maxIR - minIR));
-  error_d = ((error - error_1) / (tini) ) * 1000000.0;
-  error_i += ((error + error_1) / 2.0 ) * ((tini) / 1000000.0);
+  error_d = ((error - error_1) / (temp) ) * 1000000.0;
+  error_i += ((error + error_1) / 2.0 ) * ((temp) / 1000000.0);
   if (DEBUG_ERRORES) {
     Serial.print("e: ");
     Serial.print(error);
