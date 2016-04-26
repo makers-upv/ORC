@@ -205,7 +205,7 @@ ultrasonido.start();
   while(!ultrasonido.isFinished());
       dist_sonar = ultrasonido.getRange();
 
-      return constrain(int(dist_sonar),0,150);
+      return constrain(int(dist_sonar),0,200);
 }
 
 int* barrido(int semicono, int muestras)
@@ -230,9 +230,9 @@ int* barrido(int semicono, int muestras)
   es posible acceder a las posiciones más allá de las pedidas a la función.
   */
   //Retardos para el programa
-  int retardos=200;
-  int retardo_inicial=750;
-  int retardo_final=350;
+  int retardos=400;
+  int retardo_inicial=1000;
+  int retardo_final=450;
   //Límite de valores
   semicono=constrain(semicono,0,90);
   muestras=constrain(muestras,1,4);
